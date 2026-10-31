@@ -19,3 +19,4 @@ que apunte a `victor-123321.github.io`.
 cp ~/Desktop/plantilla-barberia/{index.html,styles.css,app.js,comun.js,config.js} ~/Desktop/portafolio/barberia/
 ```
 # portafoliovictor
+# portafoliovictor
