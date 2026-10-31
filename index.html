@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Víctor Velázquez · Desarrollo web e IA</title>
+  <meta name="description" content="Sitios web, agendas en línea, tiendas y automatización con IA para negocios. Ingeniero de software con experiencia en Oracle y HERE Technologies.">
+  <meta property="og:title" content="Víctor Velázquez · Desarrollo web e IA">
+  <meta property="og:description" content="Sitios, agendas en línea, tiendas y automatización con IA para negocios en Guadalajara.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav">
+    <a href="#" class="nav__logo">VV<span>.</span></a>
+    <nav class="nav__links">
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#experiencia">Experiencia</a>
+    </nav>
+    <a class="btn btn--sm" href="https://wa.me/523312699758?text=Hola%20V%C3%ADctor%2C%20me%20interesa%20un%20sitio%20para%20mi%20negocio" target="_blank" rel="noopener">Cotizar</a>
+  </header>
+
+  <main>
+    <section class="hero contenedor">
+      <p class="etiqueta">Guadalajara · Desarrollo web e IA</p>
+      <h1>Software que le trae clientes<br>a tu negocio.</h1>
+      <p class="hero__sub">
+        Soy Víctor Velázquez, ingeniero de software. He trabajado en <b>Oracle</b> y <b>HERE Technologies</b>
+        y he ganado tres primeros lugares en hackatones. Hago páginas web, agendas en línea,
+        tiendas y automatizaciones con IA para negocios, entregadas en días y no en meses.
+      </p>
+      <div class="hero__ctas">
+        <a class="btn" href="https://wa.me/523312699758?text=Hola%20V%C3%ADctor%2C%20me%20interesa%20un%20sitio%20para%20mi%20negocio" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+        <a class="btn btn--ghost" href="barberia/">Ver una demo en vivo →</a>
+      </div>
+      <dl class="cifras">
+        <div><dt>3×</dt><dd>1er lugar en hackatones nacionales e internacionales</dd></div>
+        <div><dt>800+</dt><dd>distribuidores usando un portal B2B que desarrollé</dd></div>
+        <div><dt>40%</dt><dd>menos tiempo de carga en mapas en producción (HERE)</dd></div>
+        <div><dt>2021</dt><dd>desarrollando software para empresas reales</dd></div>
+      </dl>
+    </section>
+
+    <section id="servicios" class="seccion contenedor">
+      <h2>Servicios</h2>
+      <p class="seccion__intro">Precio fijo, sin sorpresas. Tú no te preocupas por el hosting ni por las actualizaciones.</p>
+      <div class="servicios">
+        <article class="tarjeta tarjeta--destacada">
+          <span class="chip">Más pedido</span>
+          <h3>Agenda en línea</h3>
+          <p>Para barberías, estéticas, consultorios y spas. Tus clientes reservan solos, a cualquier hora, y la cita te llega por WhatsApp.</p>
+          <a class="link" href="barberia/">Probar la demo →</a>
+          <p class="precio">Desde <b>$3,500</b></p>
+        </article>
+        <article class="tarjeta">
+          <h3>Página web + Google</h3>
+          <p>Un sitio rápido y que se ve bien en celular. Lo dejo dado de alta en Google Maps para que te encuentren cuando busquen tu giro en tu zona.</p>
+          <p class="precio">Desde <b>$2,500</b></p>
+        </article>
+        <article class="tarjeta">
+          <h3>Tienda en línea</h3>
+          <p>Catálogo, carrito y pagos con Mercado Pago o tarjeta. Pasa de vender por mensajes de Instagram a vender en automático.</p>
+          <p class="precio">Desde <b>$6,000</b></p>
+        </article>
+        <article class="tarjeta">
+          <h3>Automatización con IA</h3>
+          <p>Un chatbot de WhatsApp que responde preguntas y toma pedidos, captura automática de facturas y reportes que llegan solos.</p>
+          <p class="precio">A cotizar</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="proyectos" class="seccion contenedor">
+      <h2>Proyectos</h2>
+      <div class="proyectos">
+        <article class="proyecto proyecto--grande">
+          <div class="proyecto__meta">
+            <span class="premio">🏆 1er lugar · Snowflake · HackMTY 2026</span>
+            <h3>CORPIDE: auditor forense con IA</h3>
+            <p>
+              Un agente de IA que investiga los registros financieros de una empresa, sigue el dinero
+              a través de un grafo de relaciones y arma un expediente de fraude defendible.
+              Cruza a los proveedores contra la lista negra del SAT (69-B) y no puede acusar
+              a nadie sin evidencia trazable en el grafo.
+            </p>
+            <p class="stack">Python · Agentes ReAct · NetworkX · Snowflake Cortex · FastAPI · Dashboard en tiempo real</p>
+            <div class="proyecto__links">
+              <a class="link" href="https://youtu.be/WHBfnFXW1JA" target="_blank" rel="noopener">Ver video demo →</a>
+              <a class="link" href="https://github.com/Victor-123321/ForensicAuditor" target="_blank" rel="noopener">Código →</a>
+            </div>
+          </div>
+          <div class="proyecto__visual" aria-hidden="true">
+            <svg viewBox="0 0 240 180">
+              <g class="aristas">
+                <line x1="40" y1="40" x2="120" y2="90"/><line x1="200" y1="35" x2="120" y2="90"/>
+                <line x1="60" y1="150" x2="120" y2="90"/><line x1="120" y1="90" x2="190" y2="140"/>
+                <line x1="40" y1="40" x2="60" y2="150"/>
+              </g>
+              <g class="rastro"><line x1="200" y1="35" x2="120" y2="90"/><line x1="120" y1="90" x2="190" y2="140"/></g>
+              <circle cx="40" cy="40" r="9"/><circle cx="60" cy="150" r="9"/>
+              <circle class="sospechoso" cx="200" cy="35" r="11"/><circle class="sospechoso" cx="120" cy="90" r="13"/>
+              <circle class="sospechoso" cx="190" cy="140" r="11"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="proyecto">
+          <span class="premio">🏆 1er lugar global · Br41n.IO 2026</span>
+          <h3>Soude: contraseñas con ondas cerebrales</h3>
+          <p>Autenticación con EEG en tiempo real: filtrado de señal y clasificación de ondas cerebrales con más de 85% de precisión, en menos de 500 ms.</p>
+          <p class="stack">Python · DSP · Machine Learning · Unicorn EEG</p>
+        </article>
+
+        <article class="proyecto">
+          <span class="premio">🏆 1er lugar nacional · DigiEduHack 2025</span>
+          <h3>BlueMinds</h3>
+          <p>Una plataforma con IA que ayuda a niños con autismo a practicar habilidades socioemocionales mediante conversaciones que se adaptan a cada niño.</p>
+          <p class="stack">Python · C# · OpenAI API · NLP</p>
+        </article>
+
+        <article class="proyecto">
+          <span class="premio">Proyecto para cliente</span>
+          <h3>Portal B2B para 800+ distribuidores</h3>
+          <p>Un portal de pedidos en línea integrado con el ERP Epicor, más un algoritmo de acomodo de cajas en 3D que aprovecha 35% mejor el espacio de envío.</p>
+          <p class="stack">.NET MVC · C# · SQL · REST APIs</p>
+        </article>
+
+        <article class="proyecto">
+          <span class="premio">🥈 2º lugar nacional · D3CODE 2025</span>
+          <h3>EnerQuantum</h3>
+          <p>Optimización de consumo de energía con algoritmos cuánticos.</p>
+          <p class="stack">Python · Qiskit</p>
+        </article>
+
+        <article class="proyecto">
+          <span class="premio">Demo en vivo</span>
+          <h3>Agenda para barberías y estéticas</h3>
+          <p>Una página con reservas paso a paso, horario en vivo y confirmación por WhatsApp. Se adapta en minutos a cualquier negocio.</p>
+          <a class="link" href="barberia/">Abrir demo →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="experiencia" class="seccion contenedor">
+      <h2>Experiencia</h2>
+      <ol class="linea">
+        <li>
+          <span class="linea__fecha">2026 – hoy</span>
+          <h3>Oracle <small>Software Engineering Intern</small></h3>
+          <p>Sistemas en Oracle APEX y PL/SQL para el reclutamiento de más de 1,000 practicantes en México e India. Optimicé consultas y bajé la latencia promedio 35%.</p>
+        </li>
+        <li>
+          <span class="linea__fecha">2025</span>
+          <h3>HERE Technologies <small>Software Engineering Intern</small></h3>
+          <p>Pipelines geoespaciales y APIs en Python y TypeScript: 40% menos tiempo de renderizado en más de 200 despliegues en producción.</p>
+        </li>
+        <li>
+          <span class="linea__fecha">2021 – hoy</span>
+          <h3>Emvel Technology <small>Full-Stack Developer</small></h3>
+          <p>Módulos de ERP, reportes automáticos y seguridad para más de 50 PyMEs.</p>
+        </li>
+        <li>
+          <span class="linea__fecha">2024 – 2028</span>
+          <h3>Tec de Monterrey <small>Ing. en Ciencias Computacionales</small></h3>
+          <p>Becario de Líderes del Mañana (beca del 100%).</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="cta contenedor">
+      <h2>¿Tienes un negocio?</h2>
+      <p>Cuéntame qué haces y te mando una demo con tu nombre y tu logo, sin compromiso.</p>
+      <a class="btn" href="https://wa.me/523312699758?text=Hola%20V%C3%ADctor%2C%20me%20interesa%20un%20sitio%20para%20mi%20negocio" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+      <p class="cta__otros">
+        <a href="mailto:victor.velazquez2210@gmail.com">victor.velazquez2210@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/vicvelazz/" target="_blank" rel="noopener">LinkedIn</a> ·
+        <a href="https://github.com/Victor-123321" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="pie contenedor">© 2026 Víctor Velázquez · Guadalajara, México</footer>
+</body>
+</html>
