@@ -58,6 +58,10 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0 0 .5rem; }
 .nav__links a:hover { color: var(--texto); }
 
 .hero { padding-top: clamp(3rem, 10vw, 6rem); padding-bottom: 3rem; }
+.hero__foto {
+  width: 96px; height: 96px; border-radius: 50%; object-fit: cover; display: block;
+  margin-bottom: 1.2rem; border: 3px solid var(--superficie); box-shadow: 0 0 0 2px var(--acento);
+}
 .etiqueta { color: var(--acento); font-weight: 600; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; margin: 0; }
 .hero h1 { font-size: clamp(2.4rem, 7vw, 4.4rem); margin: .6rem 0 1.2rem; }
 .hero__sub { font-size: 1.15rem; color: var(--tenue); max-width: 660px; margin: 0 0 2rem; }
