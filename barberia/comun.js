@@ -54,11 +54,23 @@ window.Comun = (() => {
 
   const waUrl = (numero, texto) => `https://wa.me/${numero}${texto ? "?text=" + encodeURIComponent(texto) : ""}`;
 
-  // Cliente mínimo de la API REST de Supabase (sin librerías) para el sitio público.
-  async function api(sb, ruta, cuerpo) {
-    const headers = { apikey: sb.anonKey, "Content-Type": "application/json" };
-    if (!sb.anonKey.startsWith("sb_")) headers.Authorization = `Bearer ${sb.anonKey}`;
-    const res = await fetch(`${sb.url}/rest/v1/${ruta}`, {
+  // La Data API de Neon siempre pide un JWT. El público usa el token anónimo de Neon Auth
+  // (dura unos minutos), que se pide una vez y se reusa hasta poco antes de que expire.
+  let anonimo = null;
+  async function tokenAnonimo(neon) {
+    if (!anonimo || anonimo.expira - 30 < Date.now() / 1000) {
+      const res = await fetch(`${neon.authUrl}/token/anonymous`);
+      if (!res.ok) throw new Error(`HTTP_${res.status}`);
+      const { token, expires_at } = await res.json();
+      anonimo = { token, expira: expires_at };
+    }
+    return anonimo.token;
+  }
+
+  // Cliente mínimo de la Data API (PostgREST) para el sitio público, sin librerías.
+  async function api(neon, ruta, cuerpo) {
+    const headers = { Authorization: `Bearer ${await tokenAnonimo(neon)}`, "Content-Type": "application/json" };
+    const res = await fetch(`${neon.dataApiUrl}/${ruta}`, {
       method: cuerpo ? "POST" : "GET",
       headers,
       body: cuerpo ? JSON.stringify(cuerpo) : undefined,

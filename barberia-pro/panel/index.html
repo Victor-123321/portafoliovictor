@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="panel.css?v=20261101">
+</head>
+<body>
+  <section class="login" data-vista="login" hidden>
+    <form class="login__caja" data-login>
+      <h1 data-nombre>Panel</h1>
+      <p class="tenue">Entra para ver tu agenda.</p>
+      <label class="campo" data-solo-registro hidden><span>Tu nombre</span><input name="name" autocomplete="name" maxlength="60"></label>
+      <label class="campo"><span>Correo</span><input type="email" name="email" autocomplete="username" required></label>
+      <label class="campo"><span>Contraseña</span><input type="password" name="password" autocomplete="current-password" required minlength="8"></label>
+      <p class="error" data-login-error hidden></p>
+      <button class="btn btn--bloque">Entrar</button>
+      <button type="button" class="btn btn--texto login__modo" data-modo>¿Primera vez? Crea tu cuenta</button>
+    </form>
+  </section>
+
+  <div data-vista="app" hidden>
+    <header class="barra">
+      <strong data-nombre></strong>
+      <nav class="tabs" data-tabs>
+        <button data-tab="agenda" aria-current="page">Agenda</button>
+        <button data-tab="catalogo">Servicios</button>
+        <button data-tab="horario">Horario</button>
+      </nav>
+      <button class="btn btn--texto" data-salir>Salir</button>
+    </header>
+
+    <main class="contenido">
+      <section data-panel="agenda">
+        <div class="agenda__barra">
+          <div class="fecha-nav">
+            <button class="btn btn--icono" data-dia="-1" aria-label="Día anterior">‹</button>
+            <input type="date" data-fecha>
+            <button class="btn btn--icono" data-dia="1" aria-label="Día siguiente">›</button>
+            <button class="btn btn--suave" data-hoy>Hoy</button>
+          </div>
+          <select data-filtro-prof aria-label="Filtrar por profesional"></select>
+          <button class="btn" data-nueva>+ Cita</button>
+        </div>
+        <p class="resumen" data-resumen></p>
+        <div class="citas" data-citas></div>
+      </section>
+
+      <section data-panel="catalogo" hidden>
+        <h2>Servicios</h2>
+        <p class="tenue">Los cambios se ven en tu sitio al instante. Desactiva un servicio para ocultarlo sin borrarlo.</p>
+        <div class="tabla" data-servicios></div>
+        <button class="btn btn--suave" data-agregar-servicio>+ Agregar servicio</button>
+        <h2>Equipo</h2>
+        <div class="tabla" data-equipo></div>
+        <button class="btn btn--suave" data-agregar-prof>+ Agregar persona</button>
+      </section>
+
+      <section data-panel="horario" hidden>
+        <h2>Horario semanal</h2>
+        <div class="tabla" data-horario></div>
+        <button class="btn" data-guardar-horario>Guardar horario</button>
+        <h2>Bloqueos</h2>
+        <p class="tenue">Comida, vacaciones, días festivos: en ese tiempo nadie puede reservar.</p>
+        <form class="bloqueo-form" data-bloqueo-form>
+          <select name="profesional" aria-label="Quién"></select>
+          <input type="date" name="fecha" required aria-label="Día">
+          <input type="time" name="desde" required step="900" aria-label="Desde">
+          <input type="time" name="hasta" required step="900" aria-label="Hasta">
+          <input name="motivo" placeholder="Motivo (opcional)" maxlength="80">
+          <button class="btn">Bloquear</button>
+        </form>
+        <div class="tabla" data-bloqueos></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="modal" data-modal-cita>
+    <form data-form-cita>
+      <h2>Nueva cita</h2>
+      <label class="campo"><span>Servicio</span><select name="servicio" required></select></label>
+      <label class="campo"><span>Con</span><select name="profesional" required></select></label>
+      <div class="fila">
+        <label class="campo"><span>Día</span><input type="date" name="fecha" required></label>
+        <label class="campo"><span>Hora</span><input type="time" name="hora" required step="300"></label>
+      </div>
+      <label class="campo"><span>Cliente</span><input name="nombre" required maxlength="80" placeholder="Nombre"></label>
+      <label class="campo"><span>WhatsApp (opcional)</span><input name="telefono" type="tel" inputmode="numeric" placeholder="10 dígitos"></label>
+      <label class="campo"><span>Notas</span><input name="notas" maxlength="300"></label>
+      <p class="error" data-cita-error hidden></p>
+      <div class="modal__acciones">
+        <button type="button" class="btn btn--suave" data-cerrar>Cancelar</button>
+        <button class="btn">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" data-toast hidden></div>
+
+  <script src="../config.js?v=20261101"></script>
+  <script src="../comun.js?v=20261101"></script>
+  <script type="module" src="panel.js?v=20261101"></script>
+</body>
+</html>

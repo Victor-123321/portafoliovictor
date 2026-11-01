@@ -28,9 +28,9 @@
     },
   };
 
-  // Plan Pro: con datos de Supabase en config.js las citas se guardan en la base de datos.
-  // Sin ellos (plan Básico) o si Supabase no responde, la cita se manda por WhatsApp.
-  let VIVO = Boolean(N.supabase?.url && N.supabase?.anonKey && N.supabase?.slug);
+  // Plan Pro: con datos de Neon en config.js las citas se guardan en la base de datos.
+  // Sin ellos (plan Básico) o si Neon no responde, la cita se manda por WhatsApp.
+  let VIVO = Boolean(N.neon?.authUrl && N.neon?.dataApiUrl && N.neon?.slug);
 
   // Demos personalizadas sin tocar código:
   // index.html?nombre=Barber%C3%ADa%20Don%20Pepe&color=b91c1c&wa=523311112222
@@ -54,9 +54,9 @@
 
   // Servicios, equipo y horario vienen de la base de datos para que los cambios del panel
   // se vean en el sitio sin volver a publicarlo.
-  async function cargarDeSupabase() {
+  async function cargarDeNeon() {
     const sel = "*,servicios(*),profesionales(*),horarios(*)";
-    const [neg] = await api(N.supabase, `negocios?slug=eq.${encodeURIComponent(N.supabase.slug)}&select=${sel}`);
+    const [neg] = await api(N.neon, `negocios?slug=eq.${encodeURIComponent(N.neon.slug)}&select=${sel}`);
     if (!neg) throw new Error("NEGOCIO_NO_EXISTE");
     const porOrden = (a, b) => a.orden - b.orden || a.nombre.localeCompare(b.nombre);
     N.nombre = neg.nombre;
@@ -190,8 +190,8 @@
   }
 
   async function disponibilidadRemota(servicio, profesional) {
-    const filas = await api(N.supabase, "rpc/horarios_libres", {
-      p_slug: N.supabase.slug, p_servicio: servicio.id, p_profesional: profesional?.id ?? null,
+    const filas = await api(N.neon, "rpc/horarios_libres", {
+      p_slug: N.neon.slug, p_servicio: servicio.id, p_profesional: profesional?.id ?? null,
     });
     const out = {};
     for (const { fecha, hora } of filas) (out[fecha] ||= []).push(hora);
@@ -384,8 +384,8 @@
     r.enviando = true;
     actualizarBotones();
     try {
-      const cita = await api(N.supabase, "rpc/reservar", {
-        p_slug: N.supabase.slug,
+      const cita = await api(N.neon, "rpc/reservar", {
+        p_slug: N.neon.slug,
         p_servicio: N.servicios[r.servicio].id,
         p_profesional: r.profesional.id,
         p_fecha: r.fecha,
@@ -453,9 +453,9 @@
   (async () => {
     if (VIVO) {
       try {
-        await cargarDeSupabase();
+        await cargarDeNeon();
       } catch (e) {
-        console.warn("Supabase no respondió; se usa config.js y reservas por WhatsApp.", e);
+        console.warn("Neon no respondió; se usa config.js y reservas por WhatsApp.", e);
         VIVO = false;
       }
     }

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Tu cita</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261101">
+  <style>
+    .tarjeta-cita { max-width: 460px; margin: 0 auto; padding: 3rem 16px; }
+    .tarjeta-cita h1 { font-size: 2rem; margin: 0 0 .3rem; }
+    .tarjeta-cita .estado { display: inline-block; font-weight: 600; font-size: .85rem; padding: .25rem .7rem; border-radius: 999px; margin-bottom: 1rem; }
+    .estado--viva { background: color-mix(in srgb, #22c55e 20%, transparent); color: #4ade80; }
+    .estado--cancelada { background: color-mix(in srgb, #ef4444 20%, transparent); color: #f87171; }
+    .estado--pasada { background: var(--superficie); color: var(--tenue); }
+    .tarjeta-cita .btn { width: 100%; text-align: center; margin-top: .6rem; }
+    .btn--peligro { background: transparent; color: #f87171; border-color: color-mix(in srgb, #ef4444 50%, var(--borde)); }
+  </style>
+</head>
+<body>
+  <main class="tarjeta-cita" data-contenido>
+    <p class="vacio">Cargando tu cita…</p>
+  </main>
+
+  <script src="config.js?v=20261101"></script>
+  <script src="comun.js?v=20261101"></script>
+  <script>
+    (async () => {
+      const N = window.NEGOCIO;
+      const { $, el, pesos, hora12, fechaLarga, enZona, waUrl, api, googleCalendar } = window.Comun;
+      document.documentElement.style.setProperty("--acento", N.colores.acento);
+      document.documentElement.style.setProperty("--fondo", N.colores.fondo);
+      const caja = $("[data-contenido]");
+      const poner = (...hijos) => caja.replaceChildren(...hijos.filter(Boolean));
+      const token = new URLSearchParams(location.search).get("t") || "";
+
+      if (!N.neon || !/^[0-9a-f-]{36}$/i.test(token)) {
+        poner(el("h1", {}, "Link no válido"), el("p", { class: "vacio" }, "Revisa que hayas copiado el link completo."));
+        return;
+      }
+
+      async function pintar() {
+        let c;
+        try {
+          c = await api(N.neon, "rpc/cita_publica", { p_token: token });
+        } catch {
+          poner(el("h1", {}, "Sin conexión"), el("p", { class: "vacio" }, "No pudimos cargar tu cita. Intenta de nuevo en un momento."));
+          return;
+        }
+        if (!c) {
+          poner(el("h1", {}, "Cita no encontrada"), el("p", { class: "vacio" }, "Revisa que hayas copiado el link completo."));
+          return;
+        }
+        document.title = `Tu cita en ${c.negocio}`;
+        const { fecha, hora } = enZona(c.inicio, c.zona_horaria);
+        const pasada = new Date(c.inicio) < new Date();
+        const viva = ["pendiente", "confirmada"].includes(c.estado) && !pasada;
+        const etiqueta = c.estado === "cancelada" ? ["Cancelada", "estado--cancelada"]
+          : !viva ? ["Ya pasó", "estado--pasada"]
+          : c.estado === "pendiente" ? ["Por confirmar", "estado--viva"]
+          : ["Confirmada", "estado--viva"];
+        const cuando = `${fechaLarga(fecha)}, ${hora12(hora)}`;
+
+        poner(
+          el("p", { class: "hero__kicker" }, c.negocio),
+          el("h1", {}, c.servicio),
+          el("span", { class: `estado ${etiqueta[1]}` }, etiqueta[0]),
+          el("dl", { class: "confirmada__datos" },
+            el("dt", {}, "Cuándo"), el("dd", {}, cuando),
+            el("dt", {}, "Con"), el("dd", {}, c.profesional),
+            el("dt", {}, "Precio"), el("dd", {}, pesos(c.precio)),
+            el("dt", {}, "A nombre de"), el("dd", {}, c.cliente),
+          ),
+          viva ? el("a", {
+            class: "btn", target: "_blank", rel: "noopener",
+            href: googleCalendar({ titulo: `${c.servicio} en ${c.negocio}`, inicio: c.inicio, fin: c.fin, detalles: `Con ${c.profesional}. ${location.href}`, lugar: N.direccion }),
+          }, "Agregar a mi calendario") : null,
+          el("a", { class: "btn btn--ghost", target: "_blank", rel: "noopener", href: waUrl(c.whatsapp, `Hola ${c.negocio}, tengo una cita el ${cuando} a nombre de ${c.cliente}.`) }, "Escribir por WhatsApp"),
+          viva ? el("button", { class: "btn btn--peligro", onclick: cancelar }, "Cancelar mi cita") : null,
+          c.estado === "cancelada" || pasada ? el("a", { class: "btn", href: "./" }, "Agendar otra cita") : null,
+        );
+      }
+
+      async function cancelar(e) {
+        if (!confirm("¿Seguro que quieres cancelar tu cita? El horario quedará libre para alguien más.")) return;
+        e.target.disabled = true;
+        e.target.textContent = "Cancelando…";
+        try {
+          await api(N.neon, "rpc/cancelar_cita", { p_token: token });
+        } catch {
+          alert("No pudimos cancelar. Revisa tu conexión o escríbenos por WhatsApp.");
+        }
+        pintar();
+      }
+
+      pintar();
+    })();
+  </script>
+</body>
+</html>

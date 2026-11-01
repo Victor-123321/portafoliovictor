@@ -52,11 +52,12 @@ window.NEGOCIO = {
     { autor: "Iván P.", texto: "La barba con toalla caliente vale cada peso.", estrellas: 5 },
   ],
 
-  // Plan Pro: agenda con base de datos. Déjalo en null para el plan Básico (citas por WhatsApp).
-  // Con Supabase, servicios, precios, equipo y horario se leen de la base de datos y se editan
-  // desde panel/; lo de arriba queda solo como respaldo si Supabase no responde.
-  // supabase: { url: "https://TU-PROYECTO.supabase.co", anonKey: "TU_ANON_KEY", slug: "navaja" },
-  supabase: null,
+  // Plan Pro: agenda con base de datos en Neon. Déjalo en null para el plan Básico (citas por WhatsApp).
+  // Con Neon, servicios, precios, equipo y horario se leen de la base de datos y se editan
+  // desde panel/; lo de arriba queda solo como respaldo si Neon no responde.
+  // Las dos URLs son públicas (NEON_AUTH_BASE_URL y NEON_DATA_API_URL de .env.local).
+  // neon: { authUrl: "https://…neonauth…/neondb/auth", dataApiUrl: "https://…apirest…/neondb/rest/v1", slug: "navaja" },
+  neon: null,
 
   // Créditos en el pie de página (tu publicidad gratis en cada sitio que vendas).
   creditos: { texto: "Sitio por Víctor Velázquez", url: "https://wa.me/523312699758" },

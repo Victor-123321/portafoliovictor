@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barbería</title>
+  <meta name="description" content="Agenda tu cita en línea.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261101">
+</head>
+<body>
+  <header class="nav">
+    <a href="#inicio" class="nav__logo" data-nombre></a>
+    <nav class="nav__links">
+      <a href="#servicios">Servicios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+    <button class="btn btn--sm" data-agendar>Agendar</button>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero__inner">
+        <p class="hero__kicker" data-kicker></p>
+        <h1 data-nombre></h1>
+        <p class="hero__eslogan" data-eslogan></p>
+        <div class="hero__ctas">
+          <button class="btn" data-agendar>Agendar cita</button>
+          <a class="btn btn--ghost" data-wa-link target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <p class="hero__estado" data-estado></p>
+      </div>
+    </section>
+
+    <section id="servicios" class="seccion">
+      <h2>Servicios</h2>
+      <div class="servicios" data-servicios></div>
+    </section>
+
+    <section id="equipo" class="seccion">
+      <h2>Nuestro equipo</h2>
+      <div class="equipo" data-equipo></div>
+    </section>
+
+    <section class="seccion">
+      <h2>Galería</h2>
+      <div class="galeria" data-galeria></div>
+    </section>
+
+    <section class="seccion">
+      <h2>Lo que dicen</h2>
+      <div class="resenas" data-resenas></div>
+    </section>
+
+    <section id="ubicacion" class="seccion ubicacion">
+      <div>
+        <h2>Visítanos</h2>
+        <p data-direccion></p>
+        <a class="link" data-mapa target="_blank" rel="noopener">Abrir en Google Maps →</a>
+        <p class="ubicacion__tel">Tel. <a data-tel></a></p>
+        <p data-ig-wrap>Instagram <a data-ig target="_blank" rel="noopener"></a></p>
+      </div>
+      <div>
+        <h3>Horario</h3>
+        <ul class="horario" data-horario></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <span>© <span data-anio></span> <span data-nombre></span></span>
+    <a data-creditos target="_blank" rel="noopener"></a>
+  </footer>
+
+  <button class="flotante" data-agendar aria-label="Agendar cita">Agendar</button>
+
+  <dialog class="reserva" data-reserva>
+    <form method="dialog" class="reserva__cerrar"><button aria-label="Cerrar">×</button></form>
+    <ol class="reserva__pasos" data-pasos>
+      <li>Servicio</li><li>Profesional</li><li>Fecha</li><li>Datos</li>
+    </ol>
+    <div class="reserva__cuerpo" data-cuerpo></div>
+    <div class="reserva__resumen" data-resumen></div>
+    <div class="reserva__acciones" data-acciones>
+      <button class="btn btn--ghost" data-atras>Atrás</button>
+      <button class="btn" data-siguiente>Siguiente</button>
+    </div>
+  </dialog>
+
+  <script src="config.js?v=20261101"></script>
+  <script src="comun.js?v=20261101"></script>
+  <script src="app.js?v=20261101"></script>
+</body>
+</html>
